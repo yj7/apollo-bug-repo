@@ -15,19 +15,20 @@ import "./index.css";
 
 const ALL_PEOPLE = gql`
   query AllPeople {
-    people {
-      id
-      name
-      fruits{
-        id
-        name
-      }
-    }
+    
     user{
       id,
       name,
       fruits{
         id,
+        name
+      }
+    }
+    people {
+      id
+      name
+      fruits{
+        id
         name
       }
     }
@@ -53,12 +54,11 @@ function App() {
         <p>Loading…</p>
       ) : (
         <ul>
+          <li key={data?.user.id}>{data?.user.name} - {JSON.stringify(data?.user.fruits)}</li>
           {data?.people.map(person => (
             <li key={person.id}>{person.name} - {JSON.stringify(person.fruits)}</li>
 
           ))}
-          <li key={data?.user.id}>{data?.user.name} - {JSON.stringify(data?.user.fruits)}</li>
-
         </ul>
 
       )}
